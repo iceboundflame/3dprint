@@ -134,21 +134,21 @@ currentcontrol_module_enable                 true             # Only needed on S
 alpha_step_pin                               2.0              # Pin for alpha stepper step signal
 alpha_dir_pin                                0.5!             # Pin for alpha stepper direction
 alpha_en_pin                                 0.4              # Pin for alpha enable pin
-alpha_current                                1.2 #1.6         # X stepper motor current
+alpha_current                                1.2              # X stepper motor current NOTE - config-override
 alpha_max_rate                               30000.0          # mm/min
 x_axis_max_speed                             30000.0          # mm/min cartesian max speed
 
 beta_step_pin                                2.1              # Pin for beta stepper step signal
 beta_dir_pin                                 0.11             # Pin for beta stepper direction
 beta_en_pin                                  0.10             # Pin for beta enable
-beta_current                                 1.2 #1.6         # Y stepper motor current
+beta_current                                 1.2              # Y stepper motor current NOTE - config-override
 beta_max_rate                                30000.0          # mm/min
 y_axis_max_speed                             30000.0          # mm/min
 
 gamma_step_pin                               2.2              # Pin for gamma stepper step signal
 gamma_dir_pin                                0.20!            # Pin for gamma stepper direction
 gamma_en_pin                                 0.19             # Pin for gamma enable
-gamma_current                                1.2 #1.6         # Z stepper motor current
+gamma_current                                1.2              # Z stepper motor current NOTE - config-override
 gamma_max_rate                               30000.0          # mm/min
 z_axis_max_speed                             30000.0          # mm/min
 
@@ -165,7 +165,7 @@ extruder_max_speed                           50               # mm/sec NOTE only
 extruder_step_pin                            2.3              # Pin for extruder step signal
 extruder_dir_pin                             0.22             # Pin for extruder dir signal
 extruder_en_pin                              0.21             # Pin for extruder enable signal
-delta_current                                1.5 #1.7         # Extruder stepper motor current (Kysan NEMA17s are rated 1.2A)
+delta_current                                1.0              # Extruder stepper motor current (Kysan NEMA17s are rated 1.2A) NOTE - config-override
 
 
 # Hotend temperature control configuration
@@ -255,10 +255,10 @@ panel.menu_offset                            1                # some panels will
 
 panel.alpha_jog_feedrate                     6000             # x jogging feedrate in mm/min
 panel.beta_jog_feedrate                      6000             # y jogging feedrate in mm/min
-panel.gamma_jog_feedrate                     200              # z jogging feedrate in mm/min
+panel.gamma_jog_feedrate                     6000             # z jogging feedrate in mm/min
 
-panel.hotend_temperature                     220              # temp to set hotend when preheat is selected
-panel.bed_temperature                        60               # temp to set bed when preheat is selected
+panel.hotend_temperature                     195              # temp to set hotend when preheat is selected
+panel.bed_temperature                        42               # temp to set bed when preheat is selected
 
 panel.red_led_pin                            2.8              # pin for red led on viki2 on EXP1
 panel.blue_led_pin                           4.29             # pin for blue led on viki2 on EXP1
@@ -307,7 +307,7 @@ laser_module_enable                          false            # Whether to activ
 # Miscellaneous
 # ---------------------------------------------------------------------
 dfu_enable                                   false            # for linux developers, set to true to enable DFU
-msd_disable                                  true             # speeds up booting, but you can't mount the SD card over USB
+msd_disable                                  false            # speeds up booting, but you can't mount the SD card over USB
 
 
 
