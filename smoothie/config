@@ -31,8 +31,8 @@ arm_length                                   269.00           # length of the de
 # ---------------------------------------------------------------------
 leveling-strategy.comprehensive-delta.enable true
 comprehensive-delta.probe_smoothing                       3                # if your probe has repeatability issues, this will probe multiple times & take the average (default 1)
-comprehensive-delta.probe_priming                         1                # if your probe keeps "creeping down", this will run it the specified number of times to get it to settle
-comprehensive-delta.probe_acceleration                    90               # acceleration will be temporarily set to this during probing; original is restored later; 100 is a good value
+comprehensive-delta.probe_priming                         0                # if your probe keeps "creeping down", this will run it the specified number of times to get it to settle
+comprehensive-delta.probe_acceleration                    100              # acceleration will be temporarily set to this during probing; original is restored later; 100 is a good value
 comprehensive-delta.probe_offset_x                        0                # distance between the probe and the nozzle
 comprehensive-delta.probe_offset_y                        0                #
 comprehensive-delta.probe_offset_z                        0                #
@@ -44,8 +44,8 @@ probe                                        endstop
 probe_pin                                    1.28             # optional pin for probe
 zprobe.enable                                true             # set to true to enable a zprobe
 zprobe.probe_pin                             1.28!^           # pin probe is attached to if NC remove the !, default 1.29!^
-zprobe.slow_feedrate                         3                # mm/sec probe feed rate
-zprobe.fast_feedrate                         70               # move feedrate
+zprobe.slow_feedrate                         5                # mm/sec probe feed rate
+zprobe.fast_feedrate                         90               # move feedrate
 zprobe.debounce_count                        0                # set if noisy
 zprobe.probe_radius                          110              # how far out from bed center to probe
 zprobe.probe_height                          4                # how high the probe has to be moved above trigger elevation so that it won't drag
