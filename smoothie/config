@@ -177,7 +177,7 @@ temperature_control.hotend.enable            true             # Whether to activ
 temperature_control.hotend.thermistor_pin    0.23             # Pin for the thermistor to read
 temperature_control.hotend.heater_pin        2.7              # Pin that controls the heater
 temperature_control.hotend.thermistor        Semitec          # see http://smoothieware.org/temperaturecontrol#toc5
-temperature_control.hotend.max_pwm           150
+temperature_control.hotend.max_pwm           220
 #temperature_control.hotend.beta              4066             # or set the beta value
 temperature_control.hotend.set_m_code        104              #
 temperature_control.hotend.set_and_wait_m_code 109            #
@@ -199,8 +199,8 @@ temperature_control.hotend.d_factor          230
 temperature_control.bed.enable               true             #
 temperature_control.bed.thermistor_pin       0.24             #
 temperature_control.bed.heater_pin           2.5              #
-temperature_control.bed.beta                 3974             #
-temperature_control.bed.thermistor           Honeywell100K    # 
+#temperature_control.bed.beta                 3974             #
+temperature_control.bed.thermistor           Semitec          # 
 temperature_control.bed.set_m_code           140              #
 temperature_control.bed.set_and_wait_m_code  190              #
 temperature_control.bed.designator           B                #
