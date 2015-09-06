@@ -308,7 +308,7 @@ laser_module_enable                          false            # Whether to activ
 # Miscellaneous
 # ---------------------------------------------------------------------
 dfu_enable                                   false            # for linux developers, set to true to enable DFU
-msd_disable                                  false            # speeds up booting, but you can't mount the SD card over USB
+msd_disable                                  true             # speeds up booting, but you can't mount the SD card over USB
 
 
 
