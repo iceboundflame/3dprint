@@ -22,7 +22,7 @@ M665 Z380.100
 ;E Steps per mm:
 M92 E90.8100
 ;E Filament diameter:
-M200 D1.6880
+M200 D1.71
 ;E retract length, feedrate, zlift length, feedrate:
 M207 S4.0000 F3900.0000 Z0.0000 Q6000.0000
 ;E retract recover length, feedrate:
