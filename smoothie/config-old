@@ -29,22 +29,22 @@ arm_length                                   269.00           # length of the de
 # - Jog the probe up a little, remove the dot, jog it down until it triggers, and record the exact values in offset_x/y/z
 # PLEASE NOTE: probe_offset_x and probe_offset_y MUST be 0 if you want to use depth (Z) correction!
 # ---------------------------------------------------------------------
-leveling-strategy.comprehensive-delta.enable              true
-comprehensive-delta.probe_bed_shape                       0                # 0 = circle, 1 = square
+leveling-strategy.comprehensive-delta.enable true
 comprehensive-delta.probe_smoothing                       3                # if your probe has repeatability issues, this will probe multiple times & take the average (default 1)
 comprehensive-delta.probe_priming                         0                # if your probe keeps "creeping down", this will run it the specified number of times to get it to settle
 comprehensive-delta.probe_acceleration                    100              # acceleration will be temporarily set to this during probing; original is restored later; 100 is a good value
 comprehensive-delta.probe_offset_x                        0                # distance between the probe and the nozzle
 comprehensive-delta.probe_offset_y                        0                #
 comprehensive-delta.probe_offset_z                        0                #
-comprehensive-delta.probe_ignore_bed_temp                 false            # Don't wait for bed temp to stabilize (ONLY use this if you DON'T have a heated bed!)
 
 
 # Optional Z probe, see http://smoothieware.org/zprobe
 # ---------------------------------------------------------------------
+probe                                        endstop
+probe_pin                                    1.28             # optional pin for probe
 zprobe.enable                                true             # set to true to enable a zprobe
-zprobe.probe_pin                             1.28!^           # pin probe is attached to, default 1.28!^ - if NC remove the !
-zprobe.slow_feedrate                         3                # mm/sec probe feed rate
+zprobe.probe_pin                             1.28!^           # pin probe is attached to if NC remove the !, default 1.29!^
+zprobe.slow_feedrate                         5                # mm/sec probe feed rate
 zprobe.fast_feedrate                         90               # move feedrate
 zprobe.debounce_count                        0                # set if noisy
 zprobe.probe_radius                          110              # how far out from bed center to probe
@@ -78,7 +78,7 @@ planner_queue_size                           32               # DO NOT CHANGE TH
 junction_deviation                           0.01             # Similar to the old "max_jerk", in millimeters, see : https://github.com/grbl/grbl/blob/master/planner.c#L409
 
 
-# Endstops (^ after pin = invert)
+# Endstops
 # ---------------------------------------------------------------------
 endstops_enable                              true             # the endstop module is enabled by default and can be disabled here
 delta_homing                                 true             # forces all three axis to home a the same time regardless of what is specified in G28
@@ -99,7 +99,7 @@ gamma_min_endstop                            nc
 gamma_max_endstop                            1.29^            #
 gamma_homing_direction                       home_to_max      #
 gamma_min                                    0                #
-# gamma_max moved to top of file, with the rest of the most significant delta robot settings
+# gamma_max moved to top of file, since it's one of the most frequenly adjusted settings
 
 
 # Homing
@@ -107,25 +107,17 @@ gamma_min                                    0                #
 alpha_fast_homing_rate_mm_s                  100              # feedrates in mm/second
 beta_fast_homing_rate_mm_s                   100              # "
 gamma_fast_homing_rate_mm_s                  100              # "
-alpha_slow_homing_rate_mm_s                  5                # "
-beta_slow_homing_rate_mm_s                   5                # "
-gamma_slow_homing_rate_mm_s                  5                # "
+alpha_slow_homing_rate_mm_s                  10               # "
+beta_slow_homing_rate_mm_s                   10               # "
+gamma_slow_homing_rate_mm_s                  10               # "
 alpha_homing_retract_mm                      5                # distance in mm
 beta_homing_retract_mm                       5                # "
 gamma_homing_retract_mm                      5                # "
 
-# These can be used instead of adjusting the endstop screws (don't bother setting these here - they live in config-override)
+# These can be used instead of adjusting the endstop screws
 alpha_trim                                   0                # software trim for alpha stepper endstop (in mm) - moves down
 beta_trim                                    0                # software trim for beta stepper endstop
 gamma_trim                                   0                # software trim for gamma stepper endstop
-
-move_to_origin_after_home                    false            # move XY to 0,0 after homing
-#endstop_debounce_count                      100              # uncomment if you get noise on your endstops
-
-# optional enable limit switches, actions will stop if any enabled limit switch is triggered (all are set for delta)
-#alpha_limit_enable                          false            # set to true to enable X min and max limit switches
-#beta_limit_enable                           false            # set to true to enable Y min and max limit switches
-#gamma_limit_enable                          false            # set to true to enable Z min and max limit switches
 
 
 # Stepper module configuration
@@ -236,7 +228,7 @@ switch.fan.output_type                       pwm              #
 # Automatically toggle a switch at a specified temperature
 # (ueful to turn on a fan or water pump to cool the hotend)
 # ---------------------------------------------------------------------
-temperatureswitch.hotend.enable              false            #
+temperatureswitch.hotend.enable	             false            #
 temperatureswitch.hotend.type                fan              # select which MOSFET to use, fan or misc (small MOSFETs)
 temperatureswitch.hotend.threshold_temp      60.0             # temperature to turn on (if rising) or off the switch
 temperatureswitch.hotend.heatup_poll         5                # poll heatup at 15 sec intervals
@@ -290,31 +282,14 @@ panel.external_sd.sdcd_pin                   1.31!^           # sd detect signal
 
 # Misc
 # ---------------------------------------------------------------------
+pause_button_enable                          true             #
 return_error_on_unhandled_gcode              false            #
-# kill button (used to be called pause) maybe assigned to a different pin, set to the onboard pin by default
-kill_button_enable                           true             # set to true to enable a kill button
-kill_button_pin                              2.12             # kill button pin. default is same as pause button 2.12 (2.11 is another good choice)
-
 
 
 # Serial communications configuration ( baud rate default to 9600 if undefined )
 # ---------------------------------------------------------------------
 uart0.baud_rate                              115200           # Baud rate for the default hardware serial port
 second_usb_serial_enable                     false            # This enables a second usb serial port (to have both pronterface and a terminal connected)
-
-
-# Network settings
-# ---------------------------------------------------------------------
-network.enable                               false            # enable the ethernet network services
-network.webserver.enable                     true             # enable the webserver
-#network.telnet.enable                        false           # enable the telnet server
-#network.plan9.enable                         false           # enable the plan9 network filesystem
-#network.ip_address                           auto            # use dhcp to get ip address (but then, how do you know it...?)
-# uncomment the 3 below to manually setup ip address
-network.ip_address                           192.168.1.50     # the IP address
-network.ip_mask                              255.255.255.0    # the ip mask
-network.ip_gateway                           192.168.1.1      # the gateway address
-#network.mac_override                         xx.xx.xx.xx.xx.xx # override the MAC address, only do this if you have a conflict
 
 
 # Laser module configuration
@@ -334,4 +309,16 @@ laser_module_enable                          false            # Whether to activ
 # ---------------------------------------------------------------------
 dfu_enable                                   false            # for linux developers, set to true to enable DFU
 msd_disable                                  true             # speeds up booting, but you can't mount the SD card over USB
-#watchdog_timeout                            10               # watchdog timeout in seconds, default is 10, set to 0 to disable the watchdog
+
+
+
+# network settings
+network.enable                               true             # enable the ethernet network services
+network.webserver.enable                     true             # enable the webserver
+network.telnet.enable                        true             # enable the telnet server
+#network.ip_address                           auto             # use dhcp to get ip address
+# uncomment the 3 below to manually setup ip address
+network.ip_address                           10.0.0.89        # the IP address
+network.ip_mask                              255.255.255.0    # the ip mask
+network.ip_gateway                           10.0.0.1         # the gateway address
+#network.mac_override                         xx.xx.xx.xx.xx.xx  # override the mac address, only do this if you have a conflict
